@@ -35,9 +35,9 @@ Cointer es un robot que detecta monedas introducidas por el usuario, calcula el 
 ## 🔧 Requisitos de hardware
 Placa Arduino compatible (UNO, Nano, …)
 
-3 drivers de motor paso a paso (e.g. A4988, DRV8825)
+N drivers de motor paso a paso (e.g. A4988, DRV8825)
 
-3 motores paso a paso (uno por denominación: 2 €, 1 €, 0,50 €)
+N motores paso a paso (uno por denominación: 2 €, 1 €, 0,50 €...)
 
 Teclado matricial 4×4 (pins D2–D9)
 
