@@ -1,6 +1,6 @@
 # Cointer
 
-Sistema receptor, clasificador con detección de falsificaciones y dispensado óptimo de cambio, desarrollado como proyecto para la asignatura de Ingeniería Informática, Robótica.
+Sistema clasificador con detección de falsificaciones y dispensado óptimo de cambio. Desarrollado como proyecto para la asignatura de Ingeniería Informática, Robótica.
 
 ---
 
