@@ -42,8 +42,9 @@ Este proyecto combina conocimientos de electrónica, mecánica, visión artifici
 - **Lectura de saldo**: muestra por Serial el total de euros disponible.  
 - **Entrada de importe**: teclado matricial 4×4 para introducir cantidades con coma (‘*’).  
 - **Algoritmo de cambio**: voraz con respaldo y reversión si no hay cambio exacto.  
-- **Dispensado**: control de 3 motores (2 €, 1 €, 0,50 €) para entregar las monedas.  
-- **Modularidad**: separa lógica de cálculo de cambio (Monedero) y control de motores (Motores).  
+- **Dispensado**: control de hasta 8 motores paso a paso (uno por cada denominación).  
+- **Modularidad**: separa lógica de cálculo de cambio (Monedero) y control de motores (Motores).
+- **Escalabilidad**: fácil adaptación a nuevas denominaciones o mecanismos de dispensado mediante configuración de Monedero y mapeo de motores.
 
 ---
 
