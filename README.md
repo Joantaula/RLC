@@ -6,7 +6,11 @@ Sistema de válvula/receptor de monedas automático para detección y dispensado
 
 ## 📋 Descripción
 
-Cointer es un robot que detecta monedas introducidas por el usuario, calcula el total disponible y devuelve el importe solicitado en la combinación de monedas óptima (algoritmo voraz), controlando tres motores paso a paso para dispensar las denominaciones de 2 €, 1 € y 0,50 €.
+Cointer es una solución robótica integral diseñada para automatizar el proceso de recepción y devolución de monedas en sistemas de pago físicos. El robot está formado por un módulo de detección por visión y pesaje, que identifica hasta ocho tipos de moneda (2 €, 1 €, 0,50 €, 0,20 €, 0,10 €, 0,05 €, 0,02 € y 0,01 €) y calcula en tiempo real el importe depositado. A continuación, un algoritmo voraz determina la combinación óptima de monedas para devolver el cambio exacto; si no es posible, se recurre a una rutina de respaldo que ajusta la selección.
+
+El hardware integra una Raspberry Pi para la parte de visión y control de alto nivel, junto con un Arduino y hasta ocho motores paso a paso (uno por denominación) manejados por drivers A4988 o ULN2003 para el dispensado mecánico. La parte de software está estructurada en módulos: Monedero, para la lógica de cálculo y gestión de inventario de monedas, y Motores, para el control preciso de cada actuador. Además, un teclado matricial y una pantalla LCD permiten la interacción con el usuario, mostrando saldos, importes y estados del proceso.
+
+Este proyecto combina conocimientos de electrónica, mecánica, visión artificial y diseño de algoritmos para ofrecer un sistema escalable, modular y fiable, ideal para aplicaciones en máquinas expendedoras, kioscos de autoservicio y cualquier entorno que requiera gestión automática de monedas.
 
 ---
 
@@ -46,7 +50,8 @@ Cointer es un robot que detecta monedas introducidas por el usuario, calcula el 
 ## 📦 Estructura de ficheros
 
 ```text
-/  
+/
+├─ esquema_conexiones.png 
 ├─ Monedero.h         
 ├─ Monedero.cpp       
 ├─ Motores.h          
@@ -55,27 +60,6 @@ Cointer es un robot que detecta monedas introducidas por el usuario, calcula el 
 ├─ Cointer_RLP_Budget 2.xlsx   # Presupuesto detallado
 └─ README.md          
 ```
-
-## 🔧 Requisitos de hardware
-Placa Arduino compatible (UNO, Nano, …)
-
-Raspberry Pi 4 Model B 8 GB RAM (gestión avanzada/opcional)
-
-3 drivers de motor paso a paso (A4988, DRV8825…)
-
-3 motores paso a paso (2 €, 1 €, 0,50 €)
-
-Teclado matricial 4×4 (pines D2–D9)
-
-Célula de carga con HX711 (I2C)
-
-Pantalla LCD 20×4 con I²C
-
-Cámara Raspberry Pi v2 (reconocimiento de monedas, opcional)
-
-Fuente de alimentación 5/12/−5/−12 V, 125 W
-
-Cables y estructura mecánica
 
 
 ## 🛠️ Instalación y compilación
