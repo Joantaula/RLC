@@ -1,16 +1,16 @@
 # Cointer
 
-Sistema de válvula/receptor de monedas automático para detección y dispensado óptimo de cambio, desarrollado como proyecto para la asignatura de Ingeniería Informática y Robótica.
+Sistema receptor, clasificador con detección de falsificaciones y dispensado óptimo de cambio, desarrollado como proyecto para la asignatura de Ingeniería Informática, Robótica.
 
 ---
 
 ## 📋 Descripción
 
-Cointer es una solución robótica integral diseñada para automatizar el proceso de recepción y devolución de monedas en sistemas de pago físicos. El robot está formado por un módulo de detección por visión y pesaje, que identifica hasta ocho tipos de moneda (2 €, 1 €, 0,50 €, 0,20 €, 0,10 €, 0,05 €, 0,02 € y 0,01 €) y calcula en tiempo real el importe depositado. A continuación, un algoritmo voraz determina la combinación óptima de monedas para devolver el cambio exacto; si no es posible, se recurre a una rutina de respaldo que ajusta la selección.
+Cointer es una solución robótica integral diseñada para automatizar el proceso de recepción y devolución de monedas en nuestros hogares a modo de hucha y en sistemas de pago físicos. El robot está formado por un módulo de detección por visión y pesaje, que identifica hasta ocho tipos de moneda (2 €, 1 €, 0,50 €, 0,20 €, 0,10 €, 0,05 €, 0,02 € y 0,01 €) determina si se trata de una moneda de euro o no. En caso negativo la descarta y en caso de ser una moneda de euro auténtica, la clasifica automáticamente segun su valor. Seguidamente, calcula en tiempo real el importe depositado. En caso de que el usuario solicite la extracción de un importe, un algoritmo voraz determina la combinación óptima de monedas para devolver el cambio exacto; si no es posible, se recurre a una rutina de respaldo que ajusta la selección.
 
 El hardware integra una Raspberry Pi para la parte de visión y control de alto nivel, junto con un Arduino y hasta ocho motores paso a paso (uno por denominación) manejados por drivers A4988 o ULN2003 para el dispensado mecánico. La parte de software está estructurada en módulos: Monedero, para la lógica de cálculo y gestión de inventario de monedas, y Motores, para el control preciso de cada actuador. Además, un teclado matricial y una pantalla LCD permiten la interacción con el usuario, mostrando saldos, importes y estados del proceso.
 
-Este proyecto combina conocimientos de electrónica, mecánica, visión artificial y diseño de algoritmos para ofrecer un sistema escalable, modular y fiable, ideal para aplicaciones en máquinas expendedoras, kioscos de autoservicio y cualquier entorno que requiera gestión automática de monedas.
+Este proyecto combina conocimientos de electrónica, mecánica, visión artificial y diseño de algoritmos para ofrecer un sistema escalable, modular y fiable, ideal para administrar pequeños ahorros en el hogar y aplicaciones en máquinas expendedoras, kioscos de autoservicio y cualquier entorno que requiera gestión automática de monedas.
 
 ---
 
@@ -23,7 +23,6 @@ Este proyecto combina conocimientos de electrónica, mecánica, visión artifici
 | Cámara Raspberry Pi v2 – 8 Megapixels                                 |           19,95 |        1 |        19,95 |
 | Pantalla LCD 20×4 con módulo I²C                                       |            7,95 |        1 |         7,95 |
 | Motor paso a paso 28BYJ-48 (5 V) con driver ULN2003                   |            2,95 |       10 |        29,50 |
-| Motor paso a paso NEMA 8 – 180 g/cm                                   |           27,60 |        1 |        27,60 |
 | LED Luxeon RGB 3 W con base de aluminio                               |            5,90 |        1 |         5,90 |
 | Teclado matricial de 12 botones                                       |            5,50 |        1 |         5,50 |
 | Raspberry Pi Pico                                                      |            4,95 |        1 |         4,95 |
@@ -31,7 +30,7 @@ Este proyecto combina conocimientos de electrónica, mecánica, visión artifici
 | Driver Pololu A4988 StepStick (Prusa/Reprap)                          |            6,60 |        1 |         6,60 |
 | Célula de carga 5 kg con amplificador HX711                           |            4,10 |        1 |         4,10 |
 | Fuente alimentación 4 salidas 5/12/−5/−12 125 W                       |           38,50 |        1 |        38,50 |
-| **Total**                                                             |                 |          |      **254,75** |
+| **Total**                                                             |                 |          |      **227,15** |
 
 > Consulta `Cointer_RLP_Budget 2.xlsx` para detalles de proveedores, enlaces y fechas de pedido.
 
