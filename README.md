@@ -50,15 +50,19 @@ Este proyecto combina conocimientos de electrónica, mecánica, visión artifici
 ## 📦 Estructura de ficheros
 
 ```text
-/
-├─ esquema_conexiones.png 
-├─ Monedero.h         
-├─ Monedero.cpp       
-├─ Motores.h          
-├─ Motores.cpp        
-├─ ControlDineroCompleto.ino  
+/  
+├─ diseños
+│   ├─ disseny3D.pdf
+│   ├─ disseny3D.step
+│   └─ esquema_conexiones.png
+├─ codigos
+│   ├─ Monedero.h         
+│   ├─ Monedero.cpp       
+│   ├─ Motores.h          
+│   ├─ Motores.cpp        
+│   └─ ControlDineroCompleto.ino  
 ├─ Cointer_RLP_Budget 2.xlsx   # Presupuesto detallado
-└─ README.md          
+└─ README.md       
 ```
 
 
