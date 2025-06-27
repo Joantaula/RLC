@@ -51,16 +51,35 @@ Este proyecto combina conocimientos de electrónica, mecánica, visión artifici
 
 ```text
 /  
-├─ diseños
+├─ designs
 │   ├─ disseny3D.pdf
 │   ├─ disseny3D.step
 │   └─ esquema_conexiones.png
-├─ codigos
-│   ├─ Monedero.h         
-│   ├─ Monedero.cpp       
-│   ├─ Motores.h          
-│   ├─ Motores.cpp        
-│   └─ ControlDineroCompleto.ino  
+├─images
+│   ├─ ....
+├─ src
+│   ├─ arduino
+│   │   ├─ lcd.h
+│   │   ├─ numpad.h 
+│   │   ├─ Monedero.h
+│   │   ├─ Monedero.cpp       
+│   │   ├─ Motores.h          
+│   │   ├─ Motores.cpp        
+│   │   ├─ ControlDineroCompleto.ino
+|   |   ├─ Testers
+|   |   |    ├─ (Código testing componentes)
+|   ├─ raspberry
+|   |   ├─ Neural_Network
+|   |   |   ├─ classify_image.py
+|   |   |   ├─ preprocess_image.py
+|   |   |   ├─ train_model.py
+|   |   ├─  Testers
+|   |   |   ├─ (Código testing componentes)
+|   |   ├─ config.py
+|   |   ├─ main.py
+|   |   ├─ motor.py
+|   |   ├─ sensor_peso.py
+|   |   └─ vision.py
 ├─ Cointer_RLP_Budget 2.xlsx   # Presupuesto detallado
 └─ README.md       
 ```
