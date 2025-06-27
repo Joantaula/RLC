@@ -18,19 +18,16 @@ Este proyecto combina conocimientos de electrónica, mecánica, visión artifici
 
 | Componente                                                            | P. unitario (€) | Cantidad | Subtotal (€) |
 | --------------------------------------------------------------------- | ---------------:| --------:| ------------:|
-| Raspberry Pi 4 Model B 8 GB RAM                                       |           88,55 |        1 |         88,55 |
-| I2C HX711                                                             |            4,95 |        1 |         4,95 |
+| Raspberry Pi 4 Model B 8 GB RAM                                       |           88,55 |        1 |        88,55 |
 | Cámara Raspberry Pi v2 – 8 Megapixels                                 |           19,95 |        1 |        19,95 |
-| Pantalla LCD 20×4 con módulo I²C                                       |            7,95 |        1 |         7,95 |
+| Pantalla LCD 16×2 con módulo I²C                                      |            7,95 |        1 |         7,95 |
 | Motor paso a paso 28BYJ-48 (5 V) con driver ULN2003                   |            2,95 |       10 |        29,50 |
-| LED Luxeon RGB 3 W con base de aluminio                               |            5,90 |        1 |         5,90 |
-| Teclado matricial de 12 botones                                       |            5,50 |        1 |         5,50 |
-| Raspberry Pi Pico                                                      |            4,95 |        1 |         4,95 |
+| Arduino Mega2560                                                      |           43,75 |        1 |        43,75 |
+| Teclado matricial de 16 botones                                       |            5,50 |        1 |         5,50 |
 | Memoria MicroSD Kingston 128 GB (Clase 10)                            |           10,70 |        1 |        10,70 |
-| Driver Pololu A4988 StepStick (Prusa/Reprap)                          |            6,60 |        1 |         6,60 |
 | Célula de carga 5 kg con amplificador HX711                           |            4,10 |        1 |         4,10 |
 | Fuente alimentación 4 salidas 5/12/−5/−12 125 W                       |           38,50 |        1 |        38,50 |
-| **Total**                                                             |                 |          |      **227,15** |
+| **Total**                                                             |                 |          |      **248,5** |
 
 > Consulta `Cointer_RLP_Budget 2.xlsx` para detalles de proveedores, enlaces y fechas de pedido.
 
@@ -124,3 +121,77 @@ Este es el componente mediante el que solicitaremos la extracción de un importe
 ## Pantalla
 ![Pantalla](images/pantalla.jpeg)
 Componente encargado de mostrar por pantalla de forma visual al usuario el contenido y funcionamiento del robot. Inicialmente podremos observar el valor de monedas que se encuentra almacenado (este valor se modifica al clasficar una moneda como moneda de euro gracias a la camara y sensor de peso, este nuevo valor se lo comunica la raspberry al arduino). También podemos ver cuando se esta haciendo una extracció o cuando se intenta hacer de forma errónea, teniendo sus respectivos errores explicativos (demasiados decimales, mas de una coma, valor de extracción nulo, cantidad insuficiente).
+
+# Red Neuronal
+Este proyecto utiliza una red neuronal convolucional (CNN) entrenada para clasificar monedas entre 9 categorías:
+
+- `1cent`, `2cent`, `5cent`, `10cent`, `20cent`, `50cent`, `1eur`, `2eur`, `no_coin`
+
+### 📌 Propósito
+
+La red neuronal se encarga de **clasificar automáticamente** la moneda capturada por la cámara al caer en el compartimento de pesaje. Según su clase, el sistema activa el motor correspondiente para enviar la moneda a su recipiente final o la rechaza si es falsa (`no_coin`).
+
+---
+
+### 🧱 Arquitectura del modelo
+
+- Tipo: **Convolutional Neural Network (CNN)**
+- Entrenamiento realizado con `TensorFlow/Keras`
+- Input: imágenes de tamaño **128x128x3**
+- Salida: capa softmax de 9 neuronas (una por clase)
+
+**Resumen del modelo:**
+Conv2D → MaxPooling2D → Conv2D → MaxPooling2D → Flatten → Dense → Dropout → Dense(9, softmax)
+---
+
+### 🧪 Dataset
+
+- **Datos de entrenamiento:**  
+  - Carpeta `Data_train/`  
+  - Contiene subcarpetas por clase (`1eur/`, `2cent/`, `no_coin/`, etc.)
+
+- **Tamaño aproximado del conjunto:**  
+  - ~60 imágenes por clase  
+  - Se aplicó **data augmentation** para compensar la escasez de datos.
+
+---
+
+### 🏋️‍♂️ Entrenamiento
+
+- Librerías usadas:
+  - `TensorFlow`, `Keras`, `Pillow`, `NumPy`
+- Aumento de datos:
+  - Rotación, zoom, flip horizontal y brillo
+- Optimización:
+  - Función de pérdida: `categorical_crossentropy`
+  - Optimizer: `Adam`
+  - Métrica: `accuracy`
+- Número de épocas: **50**
+- Early stopping usado para evitar sobreajuste
+
+---
+
+### 💾 Guardado del modelo
+
+El modelo se guarda como un fichero: modelo_monedas.h5
+
+Este fichero debe colocarse en la raíz del proyecto, junto a `main.py`.
+
+---
+
+### 📤 Inferencia
+
+Durante la ejecución:
+
+1. Se captura una imagen con `libcamera-still`
+2. Se redimensiona a 128x128 y se normaliza
+3. Se pasa al modelo para predecir la clase
+4. Se usa la clase predicha para decidir la acción del motor
+
+---
+
+### 🧪 Precisión
+
+- La red neuronal alcanza una precisión superior al **95%** en validación.
+- El sistema es **invariante a rotación y escala** debido al uso de secciones locales de Fourier durante el preprocesado (si se implementa).
+- Clasifica correctamente monedas no vistas si están dentro de las clases conocidas.
